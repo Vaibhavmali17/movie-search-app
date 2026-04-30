@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const API_KEY = '1c12799f';
 const BASE_URL = 'https://www.omdbapi.com/';
+console.log(BASE_URL);
 
 const useFetchMovies = (query) => {
 
