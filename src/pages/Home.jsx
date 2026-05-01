@@ -3,16 +3,18 @@ import useFetchMovies from '../hooks/useFetchMovies';
 import MovieCard from '../components/MovieCard';
 import styles from '../styles/Home.module.css';
 
+const DEFAULT_QUERY = 'marvel';
+
 const Home = () => {
-  const [query, setQuery] = useState('avengers');
-  const [search, setSearch] = useState('avengers');
+  const [query, setQuery] = useState(DEFAULT_QUERY);
+  const [search, setSearch] = useState('');
   const inputRef = useRef(null);
 
   const { movies, loading, error } = useFetchMovies(query);
 
   const handleSearch = () => {
     if (search.trim()) {
-      setQuery(search);
+      setQuery(search.trim());
       inputRef.current.blur();
     }
   };
@@ -36,7 +38,7 @@ const Home = () => {
             ref={inputRef}
             className={styles.searchInput}
             type="text"
-            placeholder="Search movies... e.g. Avengers"
+            placeholder="Search movies... e.g. Spider-Man"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onKeyPress={handleKeyPress}
@@ -61,7 +63,9 @@ const Home = () => {
       {!loading && !error && movies.length > 0 && (
         <>
           <p className={styles.sectionLabel}>
-            Results for "{query}"
+            {query === DEFAULT_QUERY
+              ? 'Popular Movies'
+              : `Results for "${query}"`}
           </p>
           <div className={styles.grid}>
             {movies.map((movie) => (

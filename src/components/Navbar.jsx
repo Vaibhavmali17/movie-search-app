@@ -1,11 +1,29 @@
-import React from 'react'
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import styles from '../styles/Navbar.module.css';
 
 const Navbar = () => {
   return (
-    <div>
-      <h1>navbar </h1>
-    </div>
-  )
-}
+    <nav className={styles.navbar}>
 
-export default Navbar
+      <Link to="/" className={styles.logo}>
+        🎬 MovieSearch
+      </Link>
+
+      <div className={styles.navLinks}>
+        <NavLink
+          to="/"
+          end
+          className={({ isActive }) =>
+            isActive ? styles.activeLink : styles.navLink
+          }
+        >
+          {/* Home */}
+        </NavLink>
+      </div>
+
+    </nav>
+  );
+};
+
+export default Navbar;
