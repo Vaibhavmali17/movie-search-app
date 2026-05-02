@@ -28,7 +28,7 @@ const useFetchMovies = (query) => {
         });
 
         if (data.Response === 'False') {
-          setError(data.Error);
+          setError('Too broad! Please type a more specific movie name.');
           setMovies([]);
         } else {
           setMovies(data.Search);
