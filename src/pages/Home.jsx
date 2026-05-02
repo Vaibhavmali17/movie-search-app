@@ -16,6 +16,8 @@ const Home = () => {
     if (search.trim()) {
       setQuery(search.trim());
       inputRef.current.blur();
+    } else {
+      inputRef.current.focus();
     }
   };
 
@@ -25,9 +27,16 @@ const Home = () => {
     }
   };
 
+  const handleRetry = () => {
+    setQuery(DEFAULT_QUERY);
+    setSearch('');
+    inputRef.current.focus();
+  };
+
   return (
     <div className={styles.container}>
 
+      {/* Hero Section */}
       <div className={styles.hero}>
         <h1 className={styles.title}>Discover Movies</h1>
         <p className={styles.subtitle}>
@@ -52,19 +61,40 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Loading Spinner */}
       {loading && (
-        <p className={styles.loading}>Loading...</p>
+        <div className={styles.spinner}>
+          <div className={styles.spinnerCircle}></div>
+        </div>
       )}
 
-      {error && (
-        <p className={styles.error}>{error}</p>
+      {/* Error State */}
+      {error && !loading && (
+        <div className={styles.errorBox}>
+          <span className={styles.errorIcon}>⚠️</span>
+          <p className={styles.errorText}>{error}</p>
+          <button
+            className={styles.errorRetry}
+            onClick={handleRetry}
+          >
+            Try Again
+          </button>
+        </div>
       )}
 
+      {/* No Results */}
+      {!loading && !error && movies.length === 0 && (
+        <p className={styles.noResults}>
+          No movies found. Try a different search!
+        </p>
+      )}
+
+      {/* Movies Grid */}
       {!loading && !error && movies.length > 0 && (
         <>
           <p className={styles.sectionLabel}>
             {query === DEFAULT_QUERY
-              ? 'Popular Movies'
+              ? '🔥 Popular Movies'
               : `Results for "${query}"`}
           </p>
           <div className={styles.grid}>
