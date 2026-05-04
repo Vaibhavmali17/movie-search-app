@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { useFavourite } from '../context/FavouriteContext';
 import styles from '../styles/Navbar.module.css';
 
 const Navbar = () => {
+  const { favourites } = useFavourite();
+
   return (
     <nav className={styles.navbar}>
 
@@ -18,7 +21,21 @@ const Navbar = () => {
             isActive ? styles.activeLink : styles.navLink
           }
         >
-          {/* Home */}
+          Home
+        </NavLink>
+
+        <NavLink
+          to="/favourites"
+          className={({ isActive }) =>
+            isActive ? styles.activeLink : styles.navLink
+          }
+        >
+          ❤️ Favourites
+          {favourites.length > 0 && (
+            <span className={styles.badge}>
+              {favourites.length}
+            </span>
+          )}
         </NavLink>
       </div>
 

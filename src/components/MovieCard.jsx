@@ -1,12 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useFavourite } from '../context/FavouriteContext';
 import styles from '../styles/MovieCard.module.css';
 
 const MovieCard = ({ movie }) => {
   const { Title, Poster, Year, Type, imdbID } = movie;
+  const { isFavourite, addFavourite, removeFavourite } = useFavourite();
+
+  const favourite = isFavourite(imdbID);
+
+  const handleFavourite = (e) => {
+    e.preventDefault();
+    if (favourite) {
+      removeFavourite(imdbID);
+    } else {
+      addFavourite(movie);
+    }
+  };
 
   return (
     <Link to={`/movie/${imdbID}`} className={styles.card}>
+
+      {/* Heart Button */}
+      <button
+        className={styles.heartBtn}
+        onClick={handleFavourite}
+        title={favourite ? 'Remove from favourites' : 'Add to favourites'}
+      >
+        {favourite ? '❤️' : '🤍'}
+      </button>
 
       {Poster !== 'N/A' ? (
         <img
