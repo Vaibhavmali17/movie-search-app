@@ -30,7 +30,7 @@ const Navbar = () => {
             isActive ? styles.activeLink : styles.navLink
           }
         >
-          ❤️ Favourites
+            ❤️ Favourites
           {favourites.length > 0 && (
             <span className={styles.badge}>
               {favourites.length}
@@ -38,9 +38,7 @@ const Navbar = () => {
           )}
         </NavLink>
       </div>
-
     </nav>
   );
 };
-
 export default Navbar;
