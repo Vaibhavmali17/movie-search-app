@@ -12,7 +12,6 @@ const useFetchMovies = (query) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-
     if (!query) return;
 
     const fetchMovies = async () => {
