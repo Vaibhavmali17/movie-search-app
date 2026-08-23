@@ -38,8 +38,8 @@ export const FavouriteProvider = ({ children }) => {
       addFavourite,
       removeFavourite,
       isFavourite,
-    }}>
-      {children}
+      }}>
+       {children}
     </FavouriteContext.Provider>
   );
 };
